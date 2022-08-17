@@ -19,8 +19,7 @@
                 <div class="col-xl-9 col-md-9 col-sm-12">
                   <input id="username" aria-label="User Name" type="text" autocomplete="off"
                     formControlName="username" placeholder="Username"
-                    class="form-control coe-input shadow-none"
-                    [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                    class="form-control coe-input shadow-none" />
                     <span class="error" *ngIf="form.get('username').touched && !form.get('username').errors?.pattern && !form.value.username">Username is required.</span>
                     <span class="error" *ngIf="form.get('username').errors?.pattern">Invalid Email.</span>
                 </div>
@@ -35,8 +34,7 @@
                 </div>
                 <div class="col-xl-9 col-md-9 col-sm-12">
                   <input id="email" aria-label="Email" type="text" autocomplete="off" formControlName="email"
-                    placeholder="Email" class="form-control shadow-none"
-                    [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                    placeholder="Email" class="form-control shadow-none" />
                     <span class="error" *ngIf="form.get('email').touched && !form.get('email').errors?.pattern && !form.value.email">Email is required.</span>
                     <span class="error" *ngIf="form.get('email').errors?.pattern">Invalid Email.</span>
                 </div>
@@ -52,8 +50,7 @@
                 <div class="col-xl-9 col-md-9 col-sm-12">
                   <input id="student_id" aria-label="Student Id" type="number" autocomplete="off"
                       formControlName="student_id" placeholder="Student Id"
-                      class="form-control coe-input shadow-none"
-                      [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                      class="form-control coe-input shadow-none" />
                       <span class="error" *ngIf="form.get('student_id').touched && !form.value.student_id">Student Id is required.</span>
                 </div>
               </div>
@@ -69,7 +66,6 @@
                   <select id="subject" aria-label="Subject"
                     class="form-control w-100 shadow-none"
                     formControlName="subject"
-                    [ngClass]="{ 'is-invalid':  submitted && f.coeType.errors }"
                     (change)="fieldsOnChange($event, 'subject')">
                     <option value="" selected disabled hidden>Please select Subject</option>
                     <option [value]="subject.name" *ngFor="let subject of categories">
@@ -113,7 +109,6 @@
                   <select id="timeslot" aria-label="Subject"
                     class="form-control w-100  shadow-none"
                     formControlName="timeslot"
-                    [ngClass]="{ 'is-invalid':  submitted && f.coeType.errors }"
                     (change)="fieldsOnChange($event,'timeslot')">
                     <option value="" selected disabled hidden>Please select Timeslot</option>
                     <option [value]="slot" *ngFor="let slot of timeSlot">
@@ -144,9 +139,9 @@
       <table *ngIf="formSubmitted" class="table table-striped">
         <thead>
         <tr>
-          <th scope="col" sortable="subject" (sort)="onSort($event)">Subject</th>
-          <th scope="col" sortable="course_topic" (sort)="onSort($event)">Course</th>
-          <th scope="col" sortable="timeslot" (sort)="onSort($event)">Timeslot</th>
+          <th scope="col">Subject</th>
+          <th scope="col">Course</th>
+          <th scope="col">Timeslot</th>
         </tr>
         </thead>
         <tbody>
