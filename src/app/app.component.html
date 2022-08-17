@@ -1,0 +1,165 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-12 text-center py-5">
+        <h2>{{title}}</h2>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <form [formGroup]="form" (submit)="submit()" novalidate>
+        <div class="org-form clearfix">
+          <div class="row">
+            <div class="col-sm-12 py-3">
+              <div class="form-group row">
+                <div class="col-xl-3 col-md-3 col-sm-12">
+                  <label for="firstName" class="label family-regular">
+                    Username
+                  </label>
+                </div>
+                <div class="col-xl-9 col-md-9 col-sm-12">
+                  <input id="username" aria-label="User Name" type="text" autocomplete="off"
+                    formControlName="username" placeholder="Username"
+                    class="form-control coe-input shadow-none"
+                    [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                    <span class="error" *ngIf="form.get('username').touched && !form.get('username').errors?.pattern && !form.value.username">Username is required.</span>
+                    <span class="error" *ngIf="form.get('username').errors?.pattern">Invalid Email.</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 py-3">
+              <div class="form-group row">
+                <div class="col-xl-3 col-md-3 col-sm-12">
+                  <label for="email" class="label family-regular">
+                    Email
+                  </label>
+                </div>
+                <div class="col-xl-9 col-md-9 col-sm-12">
+                  <input id="email" aria-label="Email" type="text" autocomplete="off" formControlName="email"
+                    placeholder="Email" class="form-control shadow-none"
+                    [ngClass]="{ 'is-invalid': submitted && f.lastName.errors }" />
+                    <span class="error" *ngIf="form.get('email').touched && !form.get('email').errors?.pattern && !form.value.email">Email is required.</span>
+                    <span class="error" *ngIf="form.get('email').errors?.pattern">Invalid Email.</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 py-3">
+              <div class="form-group row">
+                <div class="col-xl-3 col-md-3 col-sm-12">
+                  <label for="firstName" class="label family-regular">
+                    Student Id
+                  </label>
+                </div>
+                <div class="col-xl-9 col-md-9 col-sm-12">
+                  <input id="student_id" aria-label="Student Id" type="number" autocomplete="off"
+                      formControlName="student_id" placeholder="Student Id"
+                      class="form-control coe-input shadow-none"
+                      [ngClass]="{ 'is-invalid': submitted && f.firstName.errors }" />
+                      <span class="error" *ngIf="form.get('student_id').touched && !form.value.student_id">Student Id is required.</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 py-3">
+              <div class="form-group row">
+                <div class="col-xl-3 col-md-3 col-sm-12">
+                  <label for="subject" class="label family-regular">
+                    Subject
+                  </label>
+                </div>
+                <div class="col-xl-9 col-md-9 col-sm-12">
+                  <select id="subject" aria-label="Subject"
+                    class="form-control w-100 shadow-none"
+                    formControlName="subject"
+                    [ngClass]="{ 'is-invalid':  submitted && f.coeType.errors }"
+                    (change)="fieldsOnChange($event, 'subject')">
+                    <option value="" selected disabled hidden>Please select Subject</option>
+                    <option [value]="subject.name" *ngFor="let subject of categories">
+                      {{subject.name  | titlecase}}
+                    </option>
+                  </select>
+                  <span class="error" *ngIf="form.get('subject').touched && !form.value.subject">Subject is required.</span>
+                </div>
+              </div>
+            </div>
+            
+            <div class="col-sm-12 py-3">
+              <div class="form-group row">
+                <div class="col-xl-3 col-md-3 col-sm-12">
+                  <label for="topic" class="label family-regular">
+                    Course Topic
+                  </label>
+                </div>
+                <div class="col-xl-9 col-md-9 col-sm-12">
+                  <select id="topic" aria-label="Topic"
+                    class="form-control w-100 shadow-none"
+                    formControlName="course_topic"
+                    (change)="fieldsOnChange($event,'topic')">
+                    <option value="" selected disabled hidden>Please select Topic</option>
+                    <option [value]="subCat.name" *ngFor="let subCat of subCategories">
+                      {{subCat.name  | titlecase}}
+                    </option>
+                  </select>
+                  <span class="error" *ngIf="form.get('course_topic').touched && !form.value.course_topic">Topic is required.</span>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-12 py-3">
+              <div class="form-group row">
+                <div class="col-xl-3 col-md-3 col-sm-12">
+                  <label for="timeslot" class="label family-regular">
+                    Timeslot
+                  </label>
+                </div>
+                <div class="col-xl-9 col-md-9 col-sm-12">
+                  <select id="timeslot" aria-label="Subject"
+                    class="form-control w-100  shadow-none"
+                    formControlName="timeslot"
+                    [ngClass]="{ 'is-invalid':  submitted && f.coeType.errors }"
+                    (change)="fieldsOnChange($event,'timeslot')">
+                    <option value="" selected disabled hidden>Please select Timeslot</option>
+                    <option [value]="slot" *ngFor="let slot of timeSlot">
+                      {{slot}}
+                    </option>
+                  </select>
+                  <span class="error" *ngIf="form.get('timeslot').touched  && !form.value.timeslot">Timeslot is required.</span>
+                </div>
+              </div> 
+              </div>
+            </div>
+          </div>
+          <button [disabled]="form.invalid" type="submit" class="btn btn-primary btn-block">Add Course</button>
+      </form>
+    </div>
+    <div class="col-6">
+      <div *ngIf="!formSubmitted" class="card">
+        <div class="card-body">No Data Found</div>
+      </div>
+      <div *ngIf="formSubmitted" class="card">
+        <h5 class="card-header">Featured Course</h5>
+        <div class="card-body">
+          <p class="card-text">{{form.value.student_id}}</p>
+          <p class="card-text">{{form.value.username}}</p>
+          <p class="card-text">{{form.value.email}}</p>
+        </div>
+      </div>
+      <table *ngIf="formSubmitted" class="table table-striped">
+        <thead>
+        <tr>
+          <th scope="col" sortable="subject" (sort)="onSort($event)">Subject</th>
+          <th scope="col" sortable="course_topic" (sort)="onSort($event)">Course</th>
+          <th scope="col" sortable="timeslot" (sort)="onSort($event)">Timeslot</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>
+            {{ form.value.subject }}
+          </td>
+          <td>{{ form.value.course_topic }}</td>
+          <td>{{ form.value.timeslot }}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+ 
+</div>

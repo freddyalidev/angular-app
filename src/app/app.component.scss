@@ -1,0 +1,14 @@
+.is-invalid {
+    ::ng-deep .dropdown-btn {
+      border: 1px solid #dc3545 !important;
+      &.multiselect-dropdown {
+        border: 1px solid #dc3545 !important;
+      }
+    }
+  }
+
+  .error{
+    color: #f54d4d;
+    margin: 0px;
+    padding-top: 5px;
+  }
